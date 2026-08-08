@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17100b">
+<meta name="description" content="AstroSelly — AI Astrology & Energy Analysis">
+<title>AstroSelly — AI Astrology & Energy Analysis</title>
+<style>
+:root{--bg:#17100b;--bg2:#24170d;--gold:#d2a052;--gold2:#e9c477;--text:#fff4dc;--muted:#bda77d;--line:#725129;--green:#7d9b72}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% 0,#4b2d13 0,#21140b 35%,#110a06 100%);color:var(--text);font-family:Georgia,"Times New Roman",serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:8px 8px}
+.wrap{width:min(1120px,calc(100% - 28px));margin:auto}header{position:sticky;top:0;z-index:5;background:#130c08dd;backdrop-filter:blur(15px);border-bottom:1px solid #513719}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:10px;align-items:center;color:var(--gold2);font-weight:bold;letter-spacing:.08em}.mark{width:40px;height:40px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-size:22px}
+nav{display:flex;gap:25px;font-size:13px;color:#d8bd87}.btn{border:0;border-radius:12px;padding:13px 18px;background:linear-gradient(#dfb05d,#a86e28);color:#1b1007;font-weight:800;cursor:pointer}.btn:disabled{opacity:.55;cursor:wait}
+.hero{text-align:center;padding:72px 0 42px}.eyebrow{font:12px system-ui,sans-serif;letter-spacing:.28em;color:var(--gold2)}h1{font-size:clamp(54px,10vw,104px);margin:15px 0;color:var(--gold2);letter-spacing:.04em;text-shadow:0 8px 30px #000}.tag{font-size:clamp(17px,3vw,25px);color:#efd7a4}.sub{max-width:720px;margin:20px auto;color:#c7b084;font:15px/1.7 system-ui,sans-serif}.orn{color:var(--gold);font-size:22px}
+.panel{background:linear-gradient(145deg,#2b1b0eeF,#160e08f5);border:1px solid #7d5b30;border-radius:22px;box-shadow:0 20px 60px #0008;padding:26px}.title{text-align:center;color:var(--gold2);font-size:25px;margin:0 0 24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.upload{min-height:260px;border:1px dashed #a77b3d;border-radius:18px;display:grid;place-items:center;text-align:center;padding:20px;background:#c8943d08;cursor:pointer}.upload.drag{background:#c8943d18;border-color:var(--gold2)}.upload-icon{font-size:45px;color:var(--gold2)}.upload b{display:block;margin:10px;color:#f1d59d}.upload small{color:#a99570;font:12px system-ui,sans-serif}
+.fields{display:grid;gap:12px}input{width:100%;padding:14px;border:1px solid #684a25;border-radius:12px;background:#120b07;color:#fff1d2;font-size:15px}input:focus{outline:1px solid var(--gold2)}.note{text-align:center;color:#9c8868;font:12px system-ui,sans-serif;margin-top:13px}
+section{margin-bottom:55px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feature{padding:20px 12px;text-align:center;border:1px solid #5f431f;border-radius:16px;background:#24160cbb}.ico{font-size:30px;color:var(--gold2)}.feature h3{font-size:15px;color:#e8c77f}.feature p{margin:0;color:#a89575;font:12px/1.5 system-ui,sans-serif}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.step{text-align:center}.num{width:52px;height:52px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:auto;color:var(--gold2)}.step h3{color:#e8c77f;font-size:14px}.step p{color:#a89575;font:12px/1.5 system-ui,sans-serif}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:20px}.search{display:flex;gap:8px}.search input{flex:1}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chip{border:1px solid #654823;background:#1a1009;color:#cbae78;border-radius:99px;padding:8px 11px;font:12px system-ui,sans-serif;cursor:pointer}
+.status{display:none;padding:12px;border-radius:12px;margin-top:15px;font:13px system-ui,sans-serif}.status.show{display:block}.status.ok{background:#1e321d;color:#bfe0ae;border:1px solid #56734d}.status.err{background:#3a2017;color:#f0b79e;border:1px solid #80503e}.status.wait{background:#2e2416;color:#e8d19e;border:1px solid #765c30}
+.report{border:1px solid #5f431f;border-radius:15px;padding:18px;background:#120b07;min-height:150px}.result{font:14px/1.8 system-ui,sans-serif;color:#d8c5a1}.result h3{font-family:Georgia,serif;color:#e6bd6d}
+footer{border-top:1px solid #4b341c;padding:35px 0 55px;color:#9e8866;font:13px system-ui,sans-serif}.foot{display:flex;justify-content:space-between}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-card{width:min(780px,100%);max-height:90vh;overflow:auto;background:#1b1109;border:1px solid #8a6534;border-radius:20px;padding:24px}.close{float:right;background:none;border:0;color:white;font-size:26px}
+@media(max-width:800px){nav{display:none}.grid2,.lower{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:430px){.brand span{font-size:15px}.hero{padding-top:48px}h1{font-size:54px}.panel{padding:18px}.foot{flex-direction:column;gap:15px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="#"><div class="mark">☥</div><span>ASTROSELLY</span></a><nav><a href="#analyze">Analyze</a><a href="#discover">Discover</a><a href="#how">How it works</a><a href="#guide">Guide</a></nav><button class="btn" onclick="document.querySelector('#analyze').scrollIntoView({behavior:'smooth'})">Start</button></div></header>
+
+<main>
+<div class="wrap hero"><div class="eyebrow">AI ASTROLOGY & ENERGY ANALYSIS</div><h1>ASTROSELLY</h1><div class="orn">☾ ✦ ☉</div><div class="tag">Reveal the cosmic blueprint. Understand your energy.</div><p class="sub">Upload a birth chart or enter your birth details. AstroSelly organizes the chart into a deep, readable interpretation.</p></div>
+
+<section id="analyze" class="wrap panel">
+<h2 class="title">✦ ANALYZE YOUR CHART ✦</h2>
+<div class="grid2">
+<label class="upload" id="drop"><input id="file" type="file" accept="image/png,image/jpeg,image/webp" hidden><div><div class="upload-icon">⇧</div><b id="fileText">UPLOAD YOUR BIRTH CHART</b><small>PNG, JPG or WEBP · Max 6MB</small><br><br><span class="btn">Choose file</span></div></label>
+<div class="fields"><div class="note">OR ENTER YOUR BIRTH DATA</div><input id="date" type="date" aria-label="Date of birth"><input id="time" type="time" aria-label="Exact time of birth"><input id="place" placeholder="Birth place" aria-label="Birth place"><button class="btn" id="analyze">✦ Analyze with AI</button></div>
+</div>
+<div id="status" class="status"></div><div class="note">No sign up. No login. Just cosmic clarity.</div>
+</section>
+
+<section id="discover" class="wrap"><h2 class="title">WHAT YOU'LL DISCOVER</h2><div class="cards">
+<div class="feature"><div class="ico">☉</div><h3>Core Identity</h3><p>Sun, Rising and chart ruler insights.</p></div>
+<div class="feature"><div class="ico">☾</div><h3>Emotional Architecture</h3><p>Moon and emotional patterns.</p></div>
+<div class="feature"><div class="ico">♄</div><h3>Planetary Patterns</h3><p>Planets, houses and emphasis.</p></div>
+<div class="feature"><div class="ico">△</div><h3>Elements & Energy</h3><p>Dominant elements and modalities.</p></div>
+<div class="feature"><div class="ico">✧</div><h3>Aspects</h3><p>Connections shaping the path.</p></div>
+<div class="feature"><div class="ico">𓂀</div><h3>Evolutionary Points</h3><p>Nodes and symbolic themes.</p></div>
+<div class="feature"><div class="ico">☥</div><h3>Vedic Layer</h3><p>Nakshatras and planetary emphasis.</p></div>
+<div class="feature"><div class="ico">✦</div><h3>Energy Reading</h3><p>Personalized symbolic interpretation.</p></div>
+</div></section>
+
+<section id="how" class="wrap"><h2 class="title">HOW IT WORKS</h2><div class="steps">
+<div class="step"><div class="num">1</div><h3>UPLOAD</h3><p>Upload a chart or enter data.</p></div><div class="step"><div class="num">2</div><h3>AI ANALYSIS</h3><p>Read the chart structure.</p></div><div class="step"><div class="num">3</div><h3>DEEP INSIGHTS</h3><p>Get a structured report.</p></div><div class="step"><div class="num">4</div><h3>UNDERSTAND</h3><p>Explore your patterns.</p></div>
+</div></section>
+
+<section id="guide" class="wrap lower"><div class="panel"><h2 class="title" style="font-size:20px">✦ EXPLORE ASTROLOGY KNOWLEDGE</h2><div class="search"><input id="q" placeholder="Search placements, houses, aspects..."><button class="btn" id="searchBtn">⌕</button></div><div class="chips"><button class="chip">Moon in Cancer</button><button class="chip">Mars in Scorpio</button><button class="chip">7th House</button><button class="chip">Saturn Return</button></div><div id="searchResult" class="note"></div></div>
+<div class="panel"><h2 class="title" style="font-size:20px">SAMPLE REPORT PREVIEW</h2><div class="report"><p style="color:#e6bd6d">Your chart is more than a list of placements.</p><p class="result">AstroSelly synthesizes patterns, aspects, house emphasis and symbolic themes into one coherent reading.</p></div></div></section>
+</main>
+<footer><div class="wrap foot"><div><b style="color:#e4bb6b">ASTROSELLY</b><br>AI Astrology & Energy Analysis</div><div>Deep analysis · No login · Symbolic guidance, not medical or scientific diagnosis</div></div></footer>
+
+<div class="modal" id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><h2 style="color:#e6bd6d">AstroSelly — AI Reading</h2><div id="result" class="result"></div></div></div>
+
+<script>
+const file=document.getElementById('file'),drop=document.getElementById('drop'),fileText=document.getElementById('fileText'),statusBox=document.getElementById('status'),btn=document.getElementById('analyze');
+file.onchange=()=>{if(file.files[0])fileText.textContent=file.files[0].name};
+['dragenter','dragover'].forEach(e=>drop.addEventListener(e,x=>{x.preventDefault();drop.classList.add('drag')}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,x=>{x.preventDefault();drop.classList.remove('drag')}));
+drop.addEventListener('drop',e=>{if(e.dataTransfer.files[0]){file.files=e.dataTransfer.files;fileText.textContent=e.dataTransfer.files[0].name}});
+function setStatus(msg,type){statusBox.textContent=msg;statusBox.className='status show '+type}
+function openModal(){document.getElementById('modal').classList.add('open')}function closeModal(){document.getElementById('modal').classList.remove('open')}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function compressImage(f){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{let w=im.width,h=im.height,max=1800;if(w>max||h>max){const k=Math.min(max/w,max/h);w=Math.round(w*k);h=Math.round(h*k)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);resolve(c.toDataURL('image/jpeg',.78))};im.onerror=reject;im.src=r.result};r.onerror=reject;r.readAsDataURL(f)})}
+btn.onclick=async()=>{
+const f=file.files[0],date=document.getElementById('date').value,time=document.getElementById('time').value,place=document.getElementById('place').value.trim();
+if(!f&&!date){setStatus('Upload a birth chart or enter at least your birth date.','err');return}
+if(f && !/^image\\/(png|jpeg|webp)$/.test(f.type)){setStatus('Please upload PNG, JPG or WEBP.','err');return}
+if(f && f.size>6*1024*1024){setStatus('This image is larger than 6MB. Please choose a smaller image.','err');return}
+btn.disabled=true;setStatus('Reading the chart with AstroSelly AI…','wait');
+try{
+let imageData=null;if(f)imageData=await compressImage(f);
+const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({imageData,date,time,place})});
+const data=await r.json();if(!r.ok)throw new Error(data.error||'Analysis failed');
+document.getElementById('result').innerHTML=escapeHtml(data.analysis).replace(/\\n/g,'<br>');
+openModal();setStatus('Analysis complete.','ok');
+}catch(e){setStatus(e.message,'err')}finally{btn.disabled=false}
+};
+document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('q').value.trim();document.getElementById('searchResult').textContent=q?'Knowledge search ready for: '+q:'Type a placement, house or aspect.'};
+document.querySelectorAll('.chip').forEach(x=>x.onclick=()=>{document.getElementById('q').value=x.textContent;document.getElementById('searchBtn').click()});
+</script></body></html>
